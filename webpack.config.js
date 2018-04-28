@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    path.join(__dirname, 'src', 'index'),
+    path.join(__dirname, 'src', 'app'),
   ],
   module: {
     rules: [
