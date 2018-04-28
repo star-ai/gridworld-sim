@@ -6,6 +6,7 @@ module.exports = {
     'react-hot-loader/patch',
     path.join(__dirname, 'src', 'app'),
   ],
+  devtool: 'inline-source-map',
   module: {
     rules: [
       {
