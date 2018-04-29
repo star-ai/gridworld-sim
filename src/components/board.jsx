@@ -26,7 +26,6 @@ function initialiseGrid(rowsNumber, columnsNumber) {
     }
     grid.push(row);
   }
-  console.log('Grid initialised', grid);
   return grid;
 }
 
