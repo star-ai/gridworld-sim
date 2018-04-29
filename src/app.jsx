@@ -1,11 +1,11 @@
 import React from 'react';
-import ReactDom from 'react-dom';
 
-const title = 'This is the React app template.';
+function render() {
+  const title = 'This is the default React App Template.';
+  console.log('Rendering');
+  return (
+    <div>{title}</div>
+  );
+}
 
-ReactDom.render(
-  <div>{title}</div>,
-  document.getElementById('app'),
-);
-
-module.hot.accept();
+export default render;

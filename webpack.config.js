@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'react-hot-loader/patch',
-    path.join(__dirname, 'src', 'app'),
+    path.join(__dirname, 'src', 'index'),
   ],
   devtool: 'inline-source-map',
   module: {
