@@ -4,6 +4,8 @@
         "react"
     ],
     "rules": {
-        "no-plusplus":"off"
+        "no-plusplus": "off",
+        "react/prop-types": "warn",
+        "no-restricted-syntax": "off"
     }
 }

@@ -2,19 +2,38 @@ import React from 'react';
 
 import Cell from './cell';
 
-function render() {
-  const rowsNumber = 4;
-  const columnsNumber = 4;
-
+function buildRows(grid) {
   const rows = [];
-  for (let i = 0; i < rowsNumber; i++) {
+  for (const [i, row] of grid.entries()) {
     const cols = [];
-    for (let j = 0; j < columnsNumber; j++) {
-      cols.push(<Cell />);
+    const rowKey = `row${i}`;
+    for (const [j, value] of row.entries()) {
+      const columnKey = `${rowKey}col${j}`;
+      cols.push(<Cell key={columnKey} value={value} />);
     }
-    rows.push(<div className="row">{cols}</div>);
+    rows.push(<div key={rowKey} className="row">{cols}</div>);
   }
-  return <div className="board">{rows}</div>;
+
+  return rows;
+}
+
+function initialiseGrid(rowsNumber, columnsNumber) {
+  const grid = [];
+  for (let i = 0; i < rowsNumber; i++) {
+    const row = [];
+    for (let j = 0; j < columnsNumber; j++) {
+      row.push(0);
+    }
+    grid.push(row);
+  }
+  console.log('Grid initialised', grid);
+  return grid;
+}
+
+function render() {
+  const grid = initialiseGrid(4, 4);
+
+  return <div className="board">{buildRows(grid)}</div>;
 }
 
 export default render;
