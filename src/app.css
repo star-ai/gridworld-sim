@@ -1,0 +1,14 @@
+.cell {
+  background: white;
+  border: 1px solid black;
+  float: left;
+  line-height: 34px;
+  height: 34px;
+  width: 34px;
+}
+
+.row:after {
+  clear: both;
+  content: "";
+  display: table;
+}

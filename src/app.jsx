@@ -1,10 +1,16 @@
 import React from 'react';
 
+import './app.css';
+import Board from './components/board';
+
 function render() {
-  const title = 'This is the default React App Template.';
-  console.log('Rendering');
+  const title = 'Gridworld Simulator';
+
   return (
-    <div>{title}</div>
+    <div>
+      <h1>{title}</h1>
+      <Board />
+    </div>
   );
 }
 
