@@ -6,6 +6,7 @@
     "rules": {
         "no-plusplus": "off",
         "react/prop-types": "warn",
-        "no-restricted-syntax": "off"
+        "no-restricted-syntax": "off",
+        "no-unused-vars": "warn"
     }
 }
