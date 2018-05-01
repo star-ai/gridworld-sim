@@ -1,4 +1,3 @@
-import React from 'react';
 import Gridworld2d, { Actions } from '../../src/lib/envs/gridworld';
 
 test('test gridworld2d environment init', () => {
@@ -23,7 +22,6 @@ test('test gridworld2d env transitions', () => {
 
   // Transition from left upper conner right
   transition = gwEnv.sample(0, Actions.RIGHT)[0];
-  console.log('TRANS', transition);
   expect(transition.newState).toBe(0);
   expect(transition.reward).toBe(0);
   expect(transition.done).toBeTruthy();
