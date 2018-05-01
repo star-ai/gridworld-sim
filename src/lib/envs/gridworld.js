@@ -37,16 +37,18 @@ export default class Gridworld2D {
         const state = (i * this.gridShape[0]) + j;
         const transition = new Array(this.actionsN);
         for (const [, action] of Object.entries(Actions)) {
-          const newState = this.getNewState(action, i, j);
           const done = this.finishStates.includes(state);
+          const newState = done ? state : this.getNewState(action, i, j);
           const reward = done ? 0 : -1;
           const prob = 1;
-          transition[action] = {
-            prob,
-            newState,
-            reward,
-            done,
-          };
+          transition[action] = [
+            {
+              prob,
+              newState,
+              reward,
+              done,
+            },
+          ];
         }
         this.transitions[state] = transition;
       }
