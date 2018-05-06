@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Cell from './cell';
+import { Cell } from './controls';
 
 function buildRows(grid) {
   const rows = [];
@@ -29,10 +29,10 @@ function initialiseGrid(rowsNumber, columnsNumber) {
   return grid;
 }
 
-function render() {
+function Board() {
   const grid = initialiseGrid(4, 4);
 
   return <div className="board">{buildRows(grid)}</div>;
 }
 
-export default render;
+export default Board;
