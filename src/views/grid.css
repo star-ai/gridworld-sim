@@ -1,0 +1,48 @@
+.cell {
+  background: white;
+  border: 1px solid black;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  line-height: 60px;
+  height: 60px;
+  width: 60px;
+  margin-right: -1px;
+  margin-top: -1px;
+}
+
+.row:after {
+  clear: both;
+  content: "";
+  display: table;
+}
+
+.grid-settings div {
+  display: inline-block;
+  font-size: 18px;
+  margin-right: 10px;
+}
+
+.grid-settings div label {
+  margin-right: 5px;
+}
+
+.button a {
+  width: 100px;
+  font-size: 16px;
+  display: block;
+  text-align: center;
+  border: 1px solid black;
+  border-radius: 5px;
+  color: black;
+}
+
+.button a:hover {
+  background-color: lightblue;
+}
+
+.button a div {
+  margin: 2px 5px;
+}

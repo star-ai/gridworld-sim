@@ -29,10 +29,13 @@ function initialiseGrid(rowsNumber, columnsNumber) {
   return grid;
 }
 
-function Board() {
-  const grid = initialiseGrid(4, 4);
+export default function Board(props) {
+  let gridSize = [4, 4];
+  if (props.gridSize) {
+    gridSize = props.gridSize.split('x').map(v => parseInt(v));
+  }
+
+  const grid = initialiseGrid(...gridSize);
 
   return <div className="board">{buildRows(grid)}</div>;
 }
-
-export default Board;
