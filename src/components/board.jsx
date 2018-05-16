@@ -29,13 +29,36 @@ function initialiseGrid(rowsNumber, columnsNumber) {
   return grid;
 }
 
-export default function Board(props) {
-  let gridSize = [4, 4];
-  if (props.gridSize) {
-    gridSize = props.gridSize.split('x').map(v => parseInt(v));
+function round(value, precision = 0) {
+  const shift = function (value, precision) {
+    const numArray = ("" + value).split("e");
+    return +(numArray[0] + "e" + (numArray[1] ? (+numArray[1] + precision)
+                                              : precision));
   }
+  return shift(Math.round(shift(value, +precision)), -precision);
+}
 
-  const grid = initialiseGrid(...gridSize);
+function buildGridFromValues(gridSize, values) {
+  const grid = [];
+  for (let i = 0; i < gridSize[0]; i++) {
+    const row = [];
+    for (let j = 0; j < gridSize[1]; j++) {
+      const index = i * gridSize[0] + j;
+      row.push(round(values[index], 2));
+    }
+    grid.push(row);
+  }
+  return grid;
+}
+
+export default function Board(props) {
+  const gridSize = props.gridSize || [4, 4];
+  let grid = [];
+  if (props.gridValues.length === 0) {
+    grid = initialiseGrid(...gridSize);
+  } else {
+    grid = buildGridFromValues(gridSize, props.gridValues);
+  }
 
   return <div className="board">{buildRows(grid)}</div>;
 }

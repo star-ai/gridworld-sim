@@ -25,6 +25,10 @@
   margin-right: 10px;
 }
 
+.input input{
+  width: 60px;
+}
+
 .grid-settings div label {
   margin-right: 5px;
 }

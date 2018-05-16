@@ -12,7 +12,9 @@ export function DropdownList(props) {
   return (
     <div className={props.className}>
       <label>{props.label}</label>
-      <select value={props.selected} onChange={props.onChange}>
+      <select value={props.selected}
+              onChange={props.onChange}
+              disabled={props.disabled}>
         {items}
       </select>
     </div>
@@ -27,6 +29,7 @@ export function TextInput(props) {
         type={props.keyboardType}
         defaultValue={props.defaultValue}
         onKeyUp={props.onChange}
+        disabled={props.disabled}
       />
     </div>
   )
@@ -35,7 +38,7 @@ export function TextInput(props) {
 export function SimpleButton(props) {
   return (
     <div className={props.className}>
-      <a href="#" onClick={props.onClick}>
+      <a href="#" onClick={props.onClick} disabled={props.disabled}>
         <div>{props.text}</div>
       </a>
     </div>
