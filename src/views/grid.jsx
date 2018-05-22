@@ -99,12 +99,15 @@ export default class Grid extends Component {
     try {
       const nextState = await this.getNextStateDelayed(200);
 
-      this.setState({ gridValues: nextState.value });
       if (!nextState.done && this.state.running) {
+        this.setState({ gridValues: nextState.value });
         this.run();
+      } else {
+        this.setState({ running: false });
       }
     } catch (err) {
       console.error(err);
+      this.setState({ running: false });
     }
   }
     
@@ -127,7 +130,7 @@ export default class Grid extends Component {
         <GridSettings 
           gridSizeOptions={this.gridSizeOptions}
           endStates={this.state.endStates}
-          className='grid-settings'
+          className='grid-settings clr'
           theta={this.state.theta}
           selectedGridSize={this.state.gridSize}
           onGridSizeChanged={this.handleGridSizeChange}

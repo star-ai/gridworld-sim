@@ -11,12 +11,13 @@ export function DropdownList(props) {
       <option key={item.value} value={item.value}>{item.label}</option>));
   return (
     <div className={props.className}>
-      <label>{props.label}</label>
-      <select value={props.selected}
-              onChange={props.onChange}
-              disabled={props.disabled}>
-        {items}
-      </select>
+      <label>{props.label}
+        <select value={props.selected}
+                onChange={props.onChange}
+                disabled={props.disabled}>
+          {items}
+        </select>
+      </label>
     </div>
   );
 }
@@ -24,13 +25,14 @@ export function DropdownList(props) {
 export function TextInput(props) {
   return (
     <div className={props.className}>
-      <label>{props.label}</label>
-      <input
-        type={props.keyboardType}
-        defaultValue={props.defaultValue}
-        onKeyUp={props.onChange}
-        disabled={props.disabled}
-      />
+      <label>{props.label}
+        <input
+          type={props.keyboardType}
+          defaultValue={props.defaultValue}
+          onKeyUp={props.onChange}
+          disabled={props.disabled}
+        />
+      </label>
     </div>
   )
 }

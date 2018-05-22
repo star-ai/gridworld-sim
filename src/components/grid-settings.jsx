@@ -84,7 +84,7 @@ export default class GridSettings extends Component {
       <div className={this.props.className}>
         <DropdownList className='grid-options'
                       values={this.props.gridSizeOptions}
-                      label='Grid Options'
+                      label='Grid Size:'
                       selected={this.state.gridSize}
                       disabled={this.state.running}
                       onChange={this.handleGridSizeChange}
@@ -92,14 +92,14 @@ export default class GridSettings extends Component {
 
         <TextInput label='End States:'
                    defaultValue={this.endStates}
-                   className='input'
+                   className='txt-input'
                    keyboardType='numeric'
                    disabled={this.state.running}
                    onChange={this.handleEndStatesChange} />
 
-        <TextInput label='Theta'
+        <TextInput label='Theta:'
                    defaultValue={this.state.theta}
-                   className='input'
+                   className='txt-input'
                    keyboardType='numeric'
                    disabled={this.state.running}
                    onChange={this.handleThetaChange} />

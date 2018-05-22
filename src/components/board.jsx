@@ -11,7 +11,7 @@ function buildRows(grid) {
       const columnKey = `${rowKey}col${j}`;
       cols.push(<Cell key={columnKey} value={value} />);
     }
-    rows.push(<div key={rowKey} className="row">{cols}</div>);
+    rows.push(<div key={rowKey} className="row clr">{cols}</div>);
   }
 
   return rows;
