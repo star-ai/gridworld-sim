@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { DropdownList, SimpleButton, TextInput } from './controls';
-import { isNullOrUndefined } from 'util';
 
 function handleValueChange(e) {
   console.log('Value set to', e.target.value);
@@ -82,40 +81,43 @@ export default class GridSettings extends Component {
   render() {
     return (
       <div className={this.props.className}>
-        <DropdownList className='grid-options'
-                      values={this.props.gridSizeOptions}
-                      label='Grid Size:'
-                      selected={this.state.gridSize}
-                      disabled={this.state.running}
-                      onChange={this.handleGridSizeChange}
-        />
+        <fieldset>
+          <legend>Settings</legend>
+          <DropdownList className='grid-options'
+                        values={this.props.gridSizeOptions}
+                        label='Grid Size:'
+                        selected={this.state.gridSize}
+                        disabled={this.state.running}
+                        onChange={this.handleGridSizeChange}
+          />
 
-        <TextInput label='End States:'
-                   defaultValue={this.endStates}
-                   className='txt-input'
-                   keyboardType='numeric'
-                   disabled={this.state.running}
-                   onChange={this.handleEndStatesChange} />
+          <TextInput label='End States:'
+                    defaultValue={this.endStates}
+                    className='txt-input'
+                    keyboardType='numeric'
+                    disabled={this.state.running}
+                    onChange={this.handleEndStatesChange} />
 
-        <TextInput label='Theta:'
-                   defaultValue={this.state.theta}
-                   className='txt-input'
-                   keyboardType='numeric'
-                   disabled={this.state.running}
-                   onChange={this.handleThetaChange} />
+          <TextInput label='Theta:'
+                    defaultValue={this.state.theta}
+                    className='txt-input'
+                    keyboardType='numeric'
+                    disabled={this.state.running}
+                    onChange={this.handleThetaChange} />
 
-        <SimpleButton className='button'
-                      text='Next Step'
-                      disabled={this.state.running}
-                      onClick={this.handleNextButtonClick} />
+          <SimpleButton className='button'
+                        text='Next Step'
+                        disabled={this.state.running}
+                        onClick={this.handleNextButtonClick} />
 
-        <SimpleButton className='button'
-                      text={this.state.running ? 'Stop' : 'Run'}
-                      onClick={this.handleRunButtonClick} />
+          <SimpleButton className='button'
+                        text={this.state.running ? 'Stop' : 'Run'}
+                        onClick={this.handleRunButtonClick} />
 
-        <SimpleButton className='button'
-                      text='Reset'
-                      onClick={this.handleResetButtonClick} />
+          <SimpleButton className='button'
+                        text='Reset'
+                        onClick={this.handleResetButtonClick} />
+        </fieldset>
       </div>
     );
   }

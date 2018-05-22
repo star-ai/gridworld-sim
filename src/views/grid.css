@@ -16,6 +16,15 @@
   width: 3rem;
 }
 
+.grid-settings fieldset {
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.grid-settings legend {
+  font-size: 0.8rem;
+}
+
 .grid-settings .button a div {
   width: 3.5rem;
   border: 1px solid black;

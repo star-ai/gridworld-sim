@@ -12,7 +12,6 @@ export default class Grid extends Component {
   constructor(props) {
     super(props);
 
-    this.settingsTitle = 'Settings';
     this.gridSizeOptions = [
       {
         value: '4x4',
@@ -126,7 +125,6 @@ export default class Grid extends Component {
   render() {
     return (
       <div>
-        <h2>{this.settingsTitle}</h2>
         <GridSettings 
           gridSizeOptions={this.gridSizeOptions}
           endStates={this.state.endStates}

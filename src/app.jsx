@@ -10,6 +10,7 @@ function render() {
   return (
     <div>
       <h1>{title}</h1>
+      <h2>Policy Evaluation</h2>
       <Grid />
     </div>
   );
