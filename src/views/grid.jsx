@@ -46,6 +46,7 @@ export default class Grid extends Component {
     this.run = this.run.bind(this);
     this.handleThetaChange = this.handleThetaChange.bind(this);
     this.handleStopButtonClick = this.handleStopButtonClick.bind(this);
+    this.resetEnvironment = this.resetEnvironment.bind(this);
   }
 
   handleThetaChange(theta) {
@@ -69,14 +70,20 @@ export default class Grid extends Component {
   handleGridSizeChange(e) {
     const gridSize = e.target.value.split('x').map(v => parseInt(v));
     this.setState({ gridSize });
+    this.resetEnvironment();
     // TODO: add dialog to confirm grid reset.
   }
 
   handleEndStateChange(states) {
     this.setState({ endStates: states });
+    this.resetEnvironment();
   }
 
   handleResetButtonClick() {
+    this.resetEnvironment();
+  }
+
+  resetEnvironment() {
     this.func = null;
     this.setState({ gridValues: [] });
   }
