@@ -7,7 +7,7 @@ test('test policy evaluation function', () => {
   const env = new Gridworld2D([4, 4], [0, 15]);
   let count = 0;
   const max_count = 100000;
-  for (const stateValues of policyEvaluation(policy, env)) {
+  for (const stateValues of policyEvaluation({ policy, env })) {
     count++;
     if (count > max_count) {
       break;
