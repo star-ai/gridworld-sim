@@ -13,7 +13,7 @@ export default class GridSettings extends Component {
     this.state = {
       gridSize: props.selectedGridSize.join('x'),
       theta: props.theta,
-      running: false,
+      // running: false,
     };
 
     this.handleGridSizeChange = this.handleGridSizeChange.bind(this);
@@ -25,7 +25,7 @@ export default class GridSettings extends Component {
   }
 
   handleNextButtonClick(e) {
-    if (this.state.running) {
+    if (this.props.isRunning) {
       e.preventDefault();
       return;
     }
@@ -33,16 +33,16 @@ export default class GridSettings extends Component {
   }
 
   handleRunButtonClick(e) {
-    if (!this.state.running) {
+    if (!this.props.isRunning) {
       this.props.onRunButtonClicked(e);
     } else {
       this.props.onStopButtonClicked(e);
     }
-    this.setState({ running: !this.state.running });
+    // this.setState({ running: !this.state.running });
   }
 
   handleGridSizeChange(e) {
-    if (this.state.running) {
+    if (this.props.isRunning) {
       e.preventDefault();
       return;
     }
@@ -64,11 +64,11 @@ export default class GridSettings extends Component {
   }
 
   handleResetButtonClick(e) {
-    if (this.state.running) {
+    if (this.props.isRunning) {
       e.preventDefault();
       return;
     }
-    this.setState({ running: false });
+    // this.setState({ running: false });
     this.props.onResetButtonClicked();
   }
 
@@ -87,7 +87,7 @@ export default class GridSettings extends Component {
                         values={this.props.gridSizeOptions}
                         label='Grid Size:'
                         selected={this.state.gridSize}
-                        disabled={this.state.running}
+                        disabled={this.props.isRunning}
                         onChange={this.handleGridSizeChange}
           />
 
@@ -95,23 +95,23 @@ export default class GridSettings extends Component {
                     defaultValue={this.endStates}
                     className='txt-input'
                     keyboardType='numeric'
-                    disabled={this.state.running}
+                    disabled={this.props.isRunning}
                     onChange={this.handleEndStatesChange} />
 
           <TextInput label='Theta:'
                     defaultValue={this.state.theta}
                     className='txt-input'
                     keyboardType='numeric'
-                    disabled={this.state.running}
+                    disabled={this.props.isRunning}
                     onChange={this.handleThetaChange} />
 
           <SimpleButton className='button'
                         text='Next Step'
-                        disabled={this.state.running}
+                        disabled={this.props.isRunning}
                         onClick={this.handleNextButtonClick} />
 
           <SimpleButton className='button'
-                        text={this.state.running ? 'Stop' : 'Run'}
+                        text={this.props.isRunning ? 'Stop' : 'Run'}
                         onClick={this.handleRunButtonClick} />
 
           <SimpleButton className='button'

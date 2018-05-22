@@ -130,6 +130,7 @@ export default class Grid extends Component {
           endStates={this.state.endStates}
           className='grid-settings clr'
           theta={this.state.theta}
+          isRunning={this.state.running}
           selectedGridSize={this.state.gridSize}
           onGridSizeChanged={this.handleGridSizeChange}
           onEndStatesChanged={this.handleEndStateChange}
