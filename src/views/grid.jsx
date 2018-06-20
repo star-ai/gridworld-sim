@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 
-import Board from '../components/board';
+import { Board, PolicyBoard } from '../components/board';
 import GridSettings from '../components/grid-settings';
 import Policy from '../lib/policy';
 import Gridworld2D from '../lib/envs/gridworld';
-import { policyEvaluation } from '../lib/solutions/dp';
+import { policyEvaluation, policyIteration } from '../lib/solutions/dp';
 
 import './grid.css';
 
@@ -32,6 +32,7 @@ export default class Grid extends Component {
       gridValues: [],
       theta: 0.00001,
       running: false,
+      policy: null,
     };
 
     //TODO: should be passed by app.
@@ -56,15 +57,23 @@ export default class Grid extends Component {
   initEnvironment() {
     const env = new Gridworld2D(this.state.gridSize, this.state.endStates);
     const policy = new Policy(this.state.gridSize[0] * this.state.gridSize[1], 4);
-    this.func = policyEvaluation({ policy, env, theta: this.state.theta });
+    this.setState({ policy });
+    // this.func = policyEvaluation({ policy, env, theta: this.state.theta });
+    this.func = policyIteration({ policy, env, theta: this.state.theta });
   }
 
   handleNextButtonClick() {
     if (!this.func) {
       this.initEnvironment();
     }
+
     const valueFunction = this.func.next();
-    this.setState({ gridValues: valueFunction.value });
+    if (valueFunction.value) {
+      this.setState({
+        gridValues: valueFunction.value.stateValues,
+        policy: valueFunction.value.policy,
+      });
+    }
   }
 
   handleGridSizeChange(e) {
@@ -85,7 +94,7 @@ export default class Grid extends Component {
 
   resetEnvironment() {
     this.func = null;
-    this.setState({ gridValues: [] });
+    this.setState({ gridValues: [], policy: null });
   }
 
   getNextStateDelayed(timeout) {
@@ -105,8 +114,14 @@ export default class Grid extends Component {
     try {
       const nextState = await this.getNextStateDelayed(200);
 
+      if (nextState.value) {
+        this.setState({
+          gridValues: nextState.value.stateValues,
+          policy: nextState.value.policy,
+         });
+      }
+
       if (!nextState.done && this.state.running) {
-        this.setState({ gridValues: nextState.value });
         this.run();
       } else {
         this.setState({ running: false });
@@ -150,6 +165,9 @@ export default class Grid extends Component {
         <br />
         <Board gridSize={this.state.gridSize}
                gridValues={this.state.gridValues} />
+        <br />
+        <PolicyBoard gridSize={this.state.gridSize}
+                     policy={this.state.policy} />
       </div>
     )
   }

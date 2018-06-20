@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Cell } from './controls';
+import { Cell, DirectionsBlock } from './controls';
 
 function buildRows(grid) {
   const rows = [];
@@ -51,13 +51,32 @@ function buildGridFromValues(gridSize, values) {
   return grid;
 }
 
-export default function Board(props) {
+export const Board = props => {
   const gridSize = props.gridSize || [4, 4];
   let grid = [];
   if (props.gridValues.length === 0) {
     grid = initialiseGrid(...gridSize);
   } else {
     grid = buildGridFromValues(gridSize, props.gridValues);
+  }
+
+  return <div className="board">{buildRows(grid)}</div>;
+}
+
+export const PolicyBoard = props => {
+  const gridSize = props.gridSize || [4, 4];
+  const grid = [];
+  for (let i = 0; i < gridSize[0]; i++) {
+    const row = [];
+    for (let j = 0; j < gridSize[1]; j++) {
+      const index = i * gridSize[0] + j;
+      const state = i * 4 + j;
+      const visibility = props.policy 
+        ? props.policy.getStateActions(state).map(a => a > 0 ? 'visible' : 'hidden')
+        : Array(4).fill('visible');
+      row.push(<DirectionsBlock gridSize={gridSize} visibility={visibility}/>);
+    }
+    grid.push(row);
   }
 
   return <div className="board">{buildRows(grid)}</div>;

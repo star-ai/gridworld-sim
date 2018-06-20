@@ -3,6 +3,7 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+  context: __dirname,
   entry: [
     'react-hot-loader/patch',
     path.join(__dirname, 'src', 'index'),
@@ -42,7 +43,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: 'React App Template',
-      template: 'assets/templates/index.html',
+      template: path.join(__dirname, 'assets/templates/index.html'),
     }),
   ],
   devServer: {

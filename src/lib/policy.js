@@ -19,6 +19,10 @@ export default class Policy {
     return this.probabilities[state][action];
   }
 
+  getStateActions(state) {
+    return this.probabilities[state];
+  }
+
   updateActionProbability(state, action, prob, inplace=false) {
     let policy = this;
     if (!inplace) {
@@ -29,5 +33,10 @@ export default class Policy {
       policy.probabilities[state][a] = a == action ? prob : 0;
     }
     return policy;
+  }
+
+  setStateBestAction(state, bestAction) {
+    this.probabilities[state] = Array(this.actionsN).fill(0);
+    this.probabilities[state][bestAction] = 1;
   }
 }

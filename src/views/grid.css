@@ -63,44 +63,10 @@
   font-size: 0.8rem;
   font-weight: bold;
   text-align: center;
-  padding: 0;
+  padding: 5px;
   line-height: 2.5rem;
   height: 2.5rem;
   width: 2.5rem;
   margin-right: -1px;
   margin-top: -1px;
 }
-
-/* .grid-settings {
-  font-size: 0.6rem;
-}
-
-.grid-settings div {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.txt-input input {
-  width: 2rem;
-}
-
-.grid-settings div label {
-  margin-right: 5px;
-}
-
-.button a {
-  width: 100px;
-  display: block;
-  text-align: center;
-  border: 1px solid black;
-  border-radius: 5px;
-  color: black;
-}
-
-.button a:hover {
-  background-color: lightblue;
-}
-
-.button a div {
-  margin: 2px 5px;
-} */

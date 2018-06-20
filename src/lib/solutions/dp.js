@@ -1,3 +1,62 @@
+function oneStepLookAhead(env, state, valueFunction, discountFactor) {
+  const actionValues = Array(env.actionsN).fill(0);
+  for (let action=0; action < env.actionsN; action++) {
+    for (const transition of env.sample(state, action)) {
+      actionValues[action] += (transition.prob * (transition.reward + (discountFactor * valueFunction[transition.newState])));
+   }
+  }
+  return actionValues;
+}
+
+function runIteratorFunction(fn) {
+  const nextState = fn.next();
+  if (nextState.done) {
+    return nextState.value;
+  }
+  return runIteratorFunction(fn);
+}
+
+export function argmax(arr) {
+  if (arr.length === 0) {
+    return -1;
+  }
+
+  let max = arr[0];
+  let maxInd = 0;
+  for (let i = 0; i < arr.length; i++) {
+    const e = arr[i];
+    if (e > max) {
+      max = e;
+      maxInd = i;
+    }
+  }
+  return maxInd;
+}
+
+export function* policyIteration({ policy, env, discountFactor = 1.0,
+                                   theta = 0.00001 }) {
+  while (true) {
+    const { stateValues } = runIteratorFunction(
+      policyEvaluation({ policy, env, discountFactor, theta }));
+    let policyStable = true;
+    for (let state = 0; state < env.statesN; state++) {
+      const chosenAction = argmax(policy.getStateActions(state));
+      const actionValues = oneStepLookAhead(env, state, stateValues,
+                                            discountFactor);
+      const bestAction = argmax(actionValues);
+      if (chosenAction != bestAction) {
+        policyStable = false;
+      }
+
+      policy.setStateBestAction(state, bestAction);
+    }
+    if (policyStable) {
+      return { policy, stateValues };
+    }
+    yield { policy, stateValues };
+  }
+}
+
 export function* policyEvaluation({ policy, env, discountFactor = 1.0,
                                     theta = 0.00001 }) {
   // initial state-value function
@@ -21,8 +80,14 @@ export function* policyEvaluation({ policy, env, discountFactor = 1.0,
     stateValues = nextStates;
     if (delta <= theta) {
       // Stop evaluation.
-      return stateValues;
+      return {
+        'policy': policy,
+        'stateValues': stateValues,
+      };
     }
-    yield stateValues;
+    yield {
+      'policy': policy,
+      'stateValues': stateValues,
+    };
   }
 }
