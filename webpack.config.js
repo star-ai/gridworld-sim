@@ -8,6 +8,7 @@ module.exports = {
     'react-hot-loader/patch',
     path.join(__dirname, 'src', 'index'),
   ],
+  mode: 'development',
   devtool: 'inline-source-map',
   module: {
     rules: [
@@ -43,7 +44,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       title: 'React App Template',
-      template: path.join(__dirname, 'assets/templates/index.html'),
+      template: path.join(__dirname, 'src/templates/index.html'),
     }),
   ],
   devServer: {

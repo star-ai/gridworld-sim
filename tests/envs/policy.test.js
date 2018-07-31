@@ -1,4 +1,4 @@
-import Policy from '../src/lib/policy';
+import Policy from '../../src/lib/policy';
 
 test('test policy random initialisation', () => {
   const policy = new Policy(16, 4);

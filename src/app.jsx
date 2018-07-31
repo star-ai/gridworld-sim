@@ -1,7 +1,4 @@
 import React from 'react';
-
-import Grid from './views/grid';
-
 import './app.css';
 
 function render() {
@@ -10,8 +7,6 @@ function render() {
   return (
     <div>
       <h1>{title}</h1>
-      <h2>Policy Evaluation</h2>
-      <Grid />
     </div>
   );
 }

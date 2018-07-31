@@ -15,16 +15,16 @@ export default class Grid extends Component {
     this.gridSizeOptions = [
       {
         value: '4x4',
-        label: '4x4'
+        label: '4x4',
       },
       {
         value: '6x6',
-        label: '6x6'
+        label: '6x6',
       },
       {
         value: '10x10',
-        label: '10x10'
-      }
+        label: '10x10',
+      },
     ];
     this.state = {
       gridSize: [4, 4],
@@ -35,7 +35,7 @@ export default class Grid extends Component {
       policy: null,
     };
 
-    //TODO: should be passed by app.
+    // TODO: should be passed by app.
     this.func = null;
 
     this.handleGridSizeChange = this.handleGridSizeChange.bind(this);
@@ -50,13 +50,24 @@ export default class Grid extends Component {
     this.resetEnvironment = this.resetEnvironment.bind(this);
   }
 
-  handleThetaChange(theta) {
-    this.setState({ theta });
+  getNextStateDelayed(timeout) {
+    return new Promise((resolve, abort) => {
+      setTimeout(() => {
+        if (this.func != null) {
+          resolve(this.func.next());
+        } else {
+          abort(Error('function reset'));
+        }
+      }, timeout);
+    });
   }
 
   initEnvironment() {
     const env = new Gridworld2D(this.state.gridSize, this.state.endStates);
-    const policy = new Policy(this.state.gridSize[0] * this.state.gridSize[1], 4);
+    const policy = new Policy(
+      this.state.gridSize[0] * this.state.gridSize[1],
+      4,
+    );
     this.setState({ policy });
     // this.func = policyEvaluation({ policy, env, theta: this.state.theta });
     this.func = policyIteration({ policy, env, theta: this.state.theta });
@@ -77,7 +88,7 @@ export default class Grid extends Component {
   }
 
   handleGridSizeChange(e) {
-    const gridSize = e.target.value.split('x').map(v => parseInt(v));
+    const gridSize = e.target.value.split('x').map(v => parseInt(v, 10));
     this.setState({ gridSize });
     this.resetEnvironment();
     // TODO: add dialog to confirm grid reset.
@@ -97,16 +108,8 @@ export default class Grid extends Component {
     this.setState({ gridValues: [], policy: null });
   }
 
-  getNextStateDelayed(timeout) {
-    return new Promise((resolve, abort) => {
-      setTimeout(() => {
-        if (this.func != null) {
-          resolve(this.func.next());
-        } else {
-          abort(Error('function reset'));
-        }
-      }, timeout);
-    });
+  handleThetaChange(theta) {
+    this.setState({ theta });
   }
 
   async run() {
@@ -118,7 +121,7 @@ export default class Grid extends Component {
         this.setState({
           gridValues: nextState.value.stateValues,
           policy: nextState.value.policy,
-         });
+        });
       }
 
       if (!nextState.done && this.state.running) {
@@ -131,7 +134,7 @@ export default class Grid extends Component {
       this.setState({ running: false });
     }
   }
-    
+
   handleRunButtonClick() {
     if (!this.func) {
       this.initEnvironment();
@@ -147,10 +150,10 @@ export default class Grid extends Component {
   render() {
     return (
       <div>
-        <GridSettings 
+        <GridSettings
           gridSizeOptions={this.gridSizeOptions}
           endStates={this.state.endStates}
-          className='grid-settings clr'
+          className="grid-settings clr"
           theta={this.state.theta}
           isRunning={this.state.running}
           selectedGridSize={this.state.gridSize}
@@ -163,12 +166,16 @@ export default class Grid extends Component {
           onThetaChanged={this.handleThetaChange}
         />
         <br />
-        <Board gridSize={this.state.gridSize}
-               gridValues={this.state.gridValues} />
+        {/* <Board
+          gridSize={this.state.gridSize}
+          gridValues={this.state.gridValues}
+        />
         <br />
-        <PolicyBoard gridSize={this.state.gridSize}
-                     policy={this.state.policy} />
+        <PolicyBoard
+          gridSize={this.state.gridSize}
+          policy={this.state.policy}
+        /> */}
       </div>
-    )
+    );
   }
 }
