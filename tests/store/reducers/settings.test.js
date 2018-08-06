@@ -5,10 +5,15 @@ import {
   setFunction,
   updateEndStates,
 } from '../../../src/store/actions';
+import {
+  POLICY_ITERATION_FUNCTION,
+  POLICY_EVALUATION_FUNCTION,
+  FunctionNames,
+} from '../../../src/lib/solutions/constants';
 
 const initState = {
   gridSize: '4x4',
-  selectedFunction: 'policy_evaluation', // TODO: replace with constant
+  selectedFunction: POLICY_EVALUATION_FUNCTION,
   endStateIndices: [0, 15],
   theta: 0.0001,
 };
@@ -36,10 +41,10 @@ describe('Settings reducers', () => {
   });
 
   it('Set function should update the state', () => {
-    const func = Object();
+    const func = FunctionNames[POLICY_ITERATION_FUNCTION];
     expect(settings(undefined, setFunction(func))).toEqual({
       ...initState,
-      selectedFunction: func,
+      selectedFunction: POLICY_ITERATION_FUNCTION,
     });
   });
 

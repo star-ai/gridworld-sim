@@ -1,9 +1,14 @@
+import { POLICY_EVALUATION_FUNCTION, POLICY_ITERATION_FUNCTION } from './constants';
+
 function oneStepLookAhead(env, state, valueFunction, discountFactor) {
   const actionValues = Array(env.actionsN).fill(0);
-  for (let action=0; action < env.actionsN; action++) {
+  for (let action = 0; action < env.actionsN; action++) {
     for (const transition of env.sample(state, action)) {
-      actionValues[action] += (transition.prob * (transition.reward + (discountFactor * valueFunction[transition.newState])));
-   }
+      actionValues[action] +=
+        transition.prob *
+        (transition.reward +
+          (discountFactor * valueFunction[transition.newState]));
+    }
   }
   return actionValues;
 }
@@ -33,32 +38,12 @@ export function argmax(arr) {
   return maxInd;
 }
 
-export function* policyIteration({ policy, env, discountFactor = 1.0,
-                                   theta = 0.00001 }) {
-  while (true) {
-    const { stateValues } = runIteratorFunction(
-      policyEvaluation({ policy, env, discountFactor, theta }));
-    let policyStable = true;
-    for (let state = 0; state < env.statesN; state++) {
-      const chosenAction = argmax(policy.getStateActions(state));
-      const actionValues = oneStepLookAhead(env, state, stateValues,
-                                            discountFactor);
-      const bestAction = argmax(actionValues);
-      if (chosenAction != bestAction) {
-        policyStable = false;
-      }
-
-      policy.setStateBestAction(state, bestAction);
-    }
-    if (policyStable) {
-      return { policy, stateValues };
-    }
-    yield { policy, stateValues };
-  }
-}
-
-export function* policyEvaluation({ policy, env, discountFactor = 1.0,
-                                    theta = 0.00001 }) {
+export function* policyEvaluation({
+  policy,
+  env,
+  discountFactor = 1.0,
+  theta = 0.00001,
+}) {
   // initial state-value function
   let stateValues = Array(env.statesN).fill(0);
   while (true) {
@@ -69,9 +54,11 @@ export function* policyEvaluation({ policy, env, discountFactor = 1.0,
       for (let action = 0; action < env.actionsN; action++) {
         const actionProb = policy.getActionProbability(state, action);
         for (const transition of env.sample(state, action)) {
-          v += actionProb * transition.prob
-            * (transition.reward 
-              + (discountFactor * stateValues[transition.newState]));
+          v +=
+            actionProb *
+            transition.prob *
+            (transition.reward +
+              (discountFactor * stateValues[transition.newState]));
         }
       }
       delta = Math.max(delta, Math.abs(v - stateValues[state]));
@@ -81,13 +68,48 @@ export function* policyEvaluation({ policy, env, discountFactor = 1.0,
     if (delta <= theta) {
       // Stop evaluation.
       return {
-        'policy': policy,
-        'stateValues': stateValues,
+        policy,
+        stateValues,
       };
     }
     yield {
-      'policy': policy,
-      'stateValues': stateValues,
+      policy,
+      stateValues,
     };
+  }
+}
+
+export function* policyIteration({
+  policy,
+  env,
+  discountFactor = 1.0,
+  theta = 0.00001,
+}) {
+  while (true) {
+    const { stateValues } = runIteratorFunction(
+      policyEvaluation({
+        policy, env, discountFactor, theta,
+      }),
+    );
+    let policyStable = true;
+    for (let state = 0; state < env.statesN; state++) {
+      const chosenAction = argmax(policy.getStateActions(state));
+      const actionValues = oneStepLookAhead(
+        env,
+        state,
+        stateValues,
+        discountFactor,
+      );
+      const bestAction = argmax(actionValues);
+      if (chosenAction !== bestAction) {
+        policyStable = false;
+      }
+
+      policy.setStateBestAction(state, bestAction);
+    }
+    if (policyStable) {
+      return { policy, stateValues };
+    }
+    yield { policy, stateValues };
   }
 }

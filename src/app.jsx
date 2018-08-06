@@ -1,4 +1,5 @@
 import React from 'react';
+import BoardSettings from './containers/BoardSettings';
 import './app.css';
 
 function render() {
@@ -7,6 +8,7 @@ function render() {
   return (
     <div>
       <h1>{title}</h1>
+        <BoardSettings />
     </div>
   );
 }

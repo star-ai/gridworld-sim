@@ -12,6 +12,7 @@
         "no-unused-vars": "warn",
         "arrow-parens": "off",
         "function-paren-newline": "off",
-        "func-names": "off"
+        "func-names": "off",
+        "import/prefer-default-export": "off"
     }
 }

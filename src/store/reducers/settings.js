@@ -4,12 +4,21 @@ import {
   SET_FUNCTION,
   UPDATE_END_STATES,
 } from '../constants/ActionTypes';
+import {
+  POLICY_EVALUATION_FUNCTION,
+  POLICY_ITERATION_FUNCTION,
+  FunctionNames,
+} from '../../lib/solutions/constants';
 
 const initialState = {
   gridSize: '4x4',
-  selectedFunction: 'policy_evaluation', // TODO: replace with constant
+  selectedFunction: POLICY_EVALUATION_FUNCTION,
   endStateIndices: [0, 15],
   theta: 0.0001,
+};
+const mapFunctionNameToFunction = {
+  [FunctionNames[POLICY_EVALUATION_FUNCTION]]: POLICY_EVALUATION_FUNCTION,
+  [FunctionNames[POLICY_ITERATION_FUNCTION]]: POLICY_ITERATION_FUNCTION,
 };
 
 export default function settings(state = initialState, action) {
@@ -21,7 +30,7 @@ export default function settings(state = initialState, action) {
       return { ...state, theta: action.theta };
 
     case SET_FUNCTION:
-      return { ...state, selectedFunction: action.func };
+      return { ...state, selectedFunction: mapFunctionNameToFunction[action.func] };
 
     case UPDATE_END_STATES:
       if (state.endStateIndices.indexOf(action.ind) === -1) {
