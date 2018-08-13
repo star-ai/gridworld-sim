@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { Select, Label } from '../styles';
+import { Select, Label, Input } from '../styles';
 
 export const DropdownList = props => {
   const {
@@ -30,4 +30,29 @@ DropdownList.propTypes = {
 DropdownList.defaultProps = {
   selectedValue: null,
   disabled: false,
+};
+
+export const TextInput = props => (
+  <div>
+    <Label>{props.label}</Label>
+      <Input
+        type="text"
+        onChange={(e) => props.onChange(e.target.value)}
+        disabled={props.disabled}
+        placeholder={props.placeholder}
+        value={props.value}
+      />
+  </div>
+);
+TextInput.propTypes = {
+  onChange: T.func.isRequired,
+  value: T.string.isRequired,
+  disabled: T.bool,
+  placeholder: T.string,
+  label: T.string,
+};
+TextInput.defaultProps = {
+  disabled: false,
+  placeholder: undefined,
+  label: '',
 };

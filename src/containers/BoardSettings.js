@@ -6,6 +6,7 @@ import BoardSettings from '../views/BoardSettings';
 const mapStateToProps = state => ({
   gridSize: state.settings.gridSize,
   selectedFunction: state.settings.selectedFunction,
+  theta: state.settings.theta,
 });
 
 const mapDispatchToProps = dispatch => ({

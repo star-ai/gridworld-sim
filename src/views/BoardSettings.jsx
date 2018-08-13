@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { DropdownList } from '../controls';
+import { DropdownList, TextInput } from '../controls';
 import {
   Fieldset,
   Legend,
@@ -13,7 +13,9 @@ import {
 const gridSizeOptions = ['4x4', '6x6', '10x10'];
 
 
-const BoardSettings = ({ gridSize, selectedFunction, actions }) => (
+const BoardSettings = ({
+  gridSize, selectedFunction, theta, actions,
+}) => (
   <Fieldset>
     <Legend>Settings</Legend>
       <BoardSettingsElement>
@@ -32,12 +34,20 @@ const BoardSettings = ({ gridSize, selectedFunction, actions }) => (
             items={Object.values(FunctionNames)}
           />
         </BoardSettingsElement>
+          <BoardSettingsElement>
+            <TextInput
+              label="Theta"
+              onChange={actions.setTheta}
+              value={theta.toString()}
+            />
+          </BoardSettingsElement>
   </Fieldset>
 );
 BoardSettings.propTypes = {
   gridSize: T.string.isRequired,
   actions: T.objectOf(T.shape).isRequired,
   selectedFunction: T.string.isRequired,
+  theta: T.string.isRequired,
 };
 
 export default BoardSettings;

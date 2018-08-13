@@ -14,7 +14,7 @@ const initialState = {
   gridSize: '4x4',
   selectedFunction: POLICY_EVALUATION_FUNCTION,
   endStateIndices: [0, 15],
-  theta: 0.0001,
+  theta: '0.0001',
 };
 const mapFunctionNameToFunction = {
   [FunctionNames[POLICY_EVALUATION_FUNCTION]]: POLICY_EVALUATION_FUNCTION,

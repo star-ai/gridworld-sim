@@ -36,12 +36,12 @@ export const BoardSettingsElement = styled.div`
   }
 `;
 
-// export const Input = styled.input`
-//   font-size: 0.45rem;
-//   width: ${props => props.width || 3}rem;
-//   border-radius: 5px;
-//   padding: 2px;
-// `;
+export const Input = styled.input`
+  font-size: 0.45rem;
+  width: 3rem;
+  border-radius: 5px;
+  padding: 2px;
+`;
 
 // export const InlineBlock = styled.div`
 //   float: left;
