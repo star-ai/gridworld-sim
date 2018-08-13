@@ -23,12 +23,14 @@ describe('Settings reducers', () => {
     expect(settings(undefined, {})).toEqual(initState);
   });
 
-  it('Set grid size should update grid size', () => {
+  it('Set grid size should update grid size and reset default end states', () => {
     const newGridSize = '10x12';
+    const newDefaultEndStates = [0, 119];
     expect(
       settings(undefined, setGridSize(newGridSize))).toEqual({
       ...initState,
       gridSize: newGridSize,
+      endStateIndices: newDefaultEndStates,
     });
   });
 

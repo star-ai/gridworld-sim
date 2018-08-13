@@ -21,10 +21,17 @@ const mapFunctionNameToFunction = {
   [FunctionNames[POLICY_ITERATION_FUNCTION]]: POLICY_ITERATION_FUNCTION,
 };
 
+const setGridSize = (state, gridSize) => {
+  const [width, height] = gridSize.split('x').map(v => parseInt(v, 10));
+  const endStateIndices = [0, (width * height) - 1];
+  return { ...state, gridSize, endStateIndices };
+};
+
 export default function settings(state = initialState, action) {
   switch (action.type) {
     case SET_GRID_SIZE:
-      return { ...state, gridSize: action.size };
+      // return { ...state, gridSize: action.size };
+      return setGridSize(state, action.size);
 
     case SET_THETA:
       return { ...state, theta: action.theta };
