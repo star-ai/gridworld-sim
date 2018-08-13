@@ -23,14 +23,14 @@ export default class Policy {
     return this.probabilities[state];
   }
 
-  updateActionProbability(state, action, prob, inplace=false) {
+  updateActionProbability(state, action, prob, inplace = false) {
     let policy = this;
     if (!inplace) {
       policy = new Policy(this.statesN, this.actionsN, false);
       policy.probabilities = [...this.probabilities];
     }
     for (let a = 0; a < policy.actionsN; a++) {
-      policy.probabilities[state][a] = a == action ? prob : 0;
+      policy.probabilities[state][a] = a === action ? prob : 0;
     }
     return policy;
   }

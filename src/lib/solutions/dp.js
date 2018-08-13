@@ -1,5 +1,3 @@
-import { POLICY_EVALUATION_FUNCTION, POLICY_ITERATION_FUNCTION } from './constants';
-
 function oneStepLookAhead(env, state, valueFunction, discountFactor) {
   const actionValues = Array(env.actionsN).fill(0);
   for (let action = 0; action < env.actionsN; action++) {

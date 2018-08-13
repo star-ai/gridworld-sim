@@ -74,21 +74,25 @@ export const Input = styled.input`
 //   }
 // `;
 
-// export const Board = styled.div`
-//   display: inline-block;
-// `;
+export const Board = styled.div`
+  display: inline-block;
+`;
 
-// export const Cell = styled.div`
-//   background: white;
-//   border: 1px solid black;
-//   float: left;
-//   font-size: 0.8rem;
-//   font-weight: bold;
-//   text-align: center;
-//   padding: 5px;
-//   line-height: 2.5rem;
-//   height: 2.5rem;
-//   width: 2.5rem;
-//   margin-right: -1px;
-//   margin-top: -1px;
-// `;
+export const Cell = styled.div`
+  background: white;
+  border: 1px solid black;
+  float: left;
+  font-size: 0.8rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 5px;
+  line-height: 2.5rem;
+  height: 2.5rem;
+  width: 2.5rem;
+  margin-right: -1px;
+  margin-top: -1px;
+`;
+
+export const SelectedCell = Cell.extend`
+  background: grey;
+`;
