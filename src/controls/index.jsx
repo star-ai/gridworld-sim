@@ -1,6 +1,6 @@
 import React from 'react';
 import T from 'prop-types';
-import { Select, Label, Input } from '../styles';
+import { Select, Label, Input, UrlButton } from '../styles';
 
 export const DropdownList = props => {
   const {
@@ -55,4 +55,19 @@ TextInput.defaultProps = {
   disabled: false,
   placeholder: undefined,
   label: '',
+};
+
+export const Button = props => (
+  <UrlButton href="#" onClick={props.onClick} disabled={props.disabled}>
+    {props.text}
+  </UrlButton>
+);
+Button.propTypes = {
+  onClick: T.func.isRequired,
+  text: T.string,
+  disabled: T.bool,
+};
+Button.defaultProps = {
+  text: 'Button',
+  disabled: false,
 };

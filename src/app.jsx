@@ -1,6 +1,7 @@
 import React from 'react';
 import BoardSettings from './containers/BoardSettings';
 import StateValueBoard from './containers/StateValueBoardContainer';
+import ButtonsPanel from './containers/ButtonsPanelContainer';
 import './app.css';
 
 function render() {
@@ -10,8 +11,8 @@ function render() {
     <div>
       <h1>{title}</h1>
         <BoardSettings />
-          <h2>Grids</h2>
-            <StateValueBoard />
+          <StateValueBoard />
+            <ButtonsPanel />
     </div>
   );
 }

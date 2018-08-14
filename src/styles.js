@@ -13,6 +13,18 @@ export const Fieldset = styled.fieldset`
   }
 `;
 
+export const Pannel = styled.div`
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+
+  &:last-child {
+    content: "";
+    display: table;
+    clear: both;
+  }
+`;
+
 export const Legend = styled.legend`
   font-size: 0.8rem;
   text-align: left;
@@ -54,25 +66,34 @@ export const Input = styled.input`
 
 
 // export const Button = styled.button`
-//   width: 3.5rem;
-//   border: 1px solid black;
-//   border-radius: 5px;
-//   margin-right: 10px;
-//   padding: 0;
-//   display: block;
-//   text-align: center;
-//   padding: 3px;
+  // width: 3.5rem;
+  // border: 1px solid black;
+  // border-radius: 5px;
+  // margin-right: 10px;
+  // padding: 0;
+  // display: block;
+  // text-align: center;
+  // padding: 3px;
 // `;
 
-// export const UrlButton = styled.a`
-//   &:hover {
-//     color: black;
-//     background-color: lightblue;
-//   };
-//   &:last-child {
-//     margin: 0;
-//   }
-// `;
+export const UrlButton = styled.a`
+  width: 3.5rem;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-right: 10px;
+  padding: 0;
+  display: block;
+  text-align: center;
+  padding: 3px;
+
+  &:hover {
+    color: black;
+    background-color: lightblue;
+  };
+  &:last-child {
+    margin: 0;
+  }
+`;
 
 export const Board = styled.div`
   display: inline-block;
