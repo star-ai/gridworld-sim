@@ -36,12 +36,6 @@ describe('Settings actions', () => {
 });
 
 describe('Grid actions', () => {
-  it('Reset should return correct type', () => {
-    expect(actions.reset()).toEqual({
-      type: types.RESET,
-    });
-  });
-
   it('Set running should return correct type', () => {
     const isRunning = true;
     expect(actions.setRunning(isRunning)).toEqual({
@@ -50,10 +44,14 @@ describe('Grid actions', () => {
     });
   });
 
-  it('Set policy should return correct type', () => {
+  it('Set environment should return correct type', () => {
     const policy = Object();
-    expect(actions.setPolicy(policy)).toEqual({
-      type: types.SET_POLICY,
+    const func = () => console.log('test');
+    const env = Object();
+    expect(actions.setEnvironment(env, func, policy)).toEqual({
+      type: types.SET_ENVIRONMENT,
+      env,
+      func,
       policy,
     });
   });

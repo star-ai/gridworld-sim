@@ -5,7 +5,7 @@ export const Actions = Object.freeze({
   DOWN: 3,
 });
 
-export default class Gridworld2D {
+class Gridworld2D {
   constructor(shape = [4, 4], finishStates = [0, 15]) {
     this.finishStates = finishStates;
     this.gridShape = shape;
@@ -59,3 +59,5 @@ export default class Gridworld2D {
     return this.transitions[state][action];
   }
 }
+
+export default Gridworld2D;

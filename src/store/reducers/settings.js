@@ -30,7 +30,6 @@ const setGridSize = (state, gridSize) => {
 export default function settings(state = initialState, action) {
   switch (action.type) {
     case SET_GRID_SIZE:
-      // return { ...state, gridSize: action.size };
       return setGridSize(state, action.size);
 
     case SET_THETA:
